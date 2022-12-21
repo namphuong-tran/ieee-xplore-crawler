@@ -61,7 +61,7 @@ def get_ieee_kwd(page_text):
             return kwd.replace('[', '').replace(']', '').replace('"', '').replace(' ', '-').lower()
 
 def get_author_kwd(page_text):
-    ex = '"type":"Author Keywords","kwd":(.+?)}'
+    ex = '"type":"Author Keywords ","kwd":(.+?)}'
     article_kwd = re.findall(ex, page_text, re.S)
     for kwd in article_kwd:
         if kwd != 'true' and kwd != 'false':
