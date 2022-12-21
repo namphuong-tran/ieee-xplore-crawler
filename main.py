@@ -4,7 +4,7 @@
 # Realize the function: input the ieee keywords you want to search, and output the titles, abstracts, retrieval dates, keywords, and article homepages of all articles found.
 
 from get_articlelist import airtcle_list
-from get_information import get_article, get_title, get_abstract, get_published, get_date, get_kwd, get_citation_number, get_year
+from get_information import get_article, get_title, get_abstract, get_published, get_date, get_author_kwd, get_citation_number, get_year
 import pandas as pd 
 
 # Enter search keywords
@@ -25,11 +25,11 @@ for airtcle_number in Airtcle_List:
     published = get_published(page_text)
     publication_date = get_date(page_text)
     publication_year = get_year(page_text)
-    keywords = get_kwd(page_text)
+    keywords = get_author_kwd(page_text)
     citation_number = get_citation_number(page_text)
     url = 'https://ieeexplore.ieee.org/document/' + str(airtcle_number)
     df.loc[num_article] = [num_article+1, 'Journal', publication_year, title, abstract, published, publication_date, keywords, citation_number, url]
-
+    
 df.to_csv('results1.csv', index=False)
 
 print('Finish!')
