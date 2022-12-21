@@ -22,14 +22,12 @@ def get_title(page_text):
         if title != 'true' and title != 'false':
             return title.replace("<inf>", "").replace("</inf>", "")
 
-
 def get_abstract(page_text):
     ex = '"abstract":"(.+?)",'
     article_abstract = re.findall(ex, page_text, re.S)
     for abstract in article_abstract:
         if abstract != 'true' and abstract != 'false':
             return abstract
-
 
 def get_published(page_text):
     ex = '"publicationTitle":"(.+?)"'
@@ -55,13 +53,19 @@ def get_year(page_text):
             return int(year)
 
 
-def get_kwd(page_text):
+def get_ieee_kwd(page_text):
     ex = '"type":"IEEE Keywords","kwd":(.+?)}'
     article_kwd = re.findall(ex, page_text, re.S)
     for kwd in article_kwd:
         if kwd != 'true' and kwd != 'false':
             return kwd.replace('[', '').replace(']', '').replace('"', '').replace(' ', '-').lower()
 
+def get_author_kwd(page_text):
+    ex = '"type":"Author Keywords","kwd":(.+?)}'
+    article_kwd = re.findall(ex, page_text, re.S)
+    for kwd in article_kwd:
+        if kwd != 'true' and kwd != 'false':
+            return kwd.replace('[', '').replace(']', '').replace('"', '').replace(' ', '-').lower()
 
 def get_citation_number(page_text):
     ex = '"citationCountPaper":(.+?),'
